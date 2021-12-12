@@ -20,7 +20,7 @@
   - 预训练模型下载链接：[8s1d](https://pan.baidu.com/s/1iRkM4wJckckfvb4vC6w8tQ)
 
 ### step 3: 运行以下代码测试图片
-  `python inference.py --image_path [your test image path] --model [pretrain model path] --save_path [save path]`
+  `python test.py --image_path [your test image path] --model [pretrain model path] --save_path [save path]`
 - 测试结果：
 
 ![0498](https://github.com/pljq/PHNet/img/results/0498.jpg)
