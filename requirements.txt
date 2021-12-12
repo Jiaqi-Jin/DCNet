@@ -7,3 +7,5 @@ scipy
 numpy
 math
 opencv
+scikit-image
+deep-hough
