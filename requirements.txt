@@ -1,0 +1,9 @@
+Cython
+torch>=1.5
+torchvision>=0.6.1
+progress
+matplotlib
+scipy
+numpy
+math
+opencv
