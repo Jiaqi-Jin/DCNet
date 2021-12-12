@@ -4,10 +4,10 @@
 
 ## Network Architecture
 
-![pipeline](https://github.com/pljq/PHNet/pipeline.png)
+![pipeline](https://github.com/pljq/PHNet/blob/main/pipeline.png)
 
 ## Require
-- 第三方Python包详见[requirement.txt](https://github.com/pljq/PHNet/requirement.txt)
+- 第三方Python包详见[requirement.txt](https://github.com/pljq/PHNet/blob/main/requirements.txt)
 
 ## Development Environment
 - 使用pytorch 3.6 在Ubuntu 18.04系统上运行，显存8G
@@ -23,10 +23,10 @@
   `python test.py --image_path [your test image path] --model [pretrain model path] --save_path [save path]`
 - 测试结果：
 
-![0498](https://github.com/pljq/PHNet/img/results/0498.jpg)
+![0498](https://github.com/pljq/PHNet/tree/main/img/results/0498.jpg)
 
-![1173](https://github.com/pljq/PHNet/img/results/1173.jpg)
+![1173](https://github.com/pljq/PHNet/tree/main/img/results/1173.jpg)
 
-![1648](https://github.com/pljq/PHNet/img/results/1638.jpg)
+![1648](https://github.com/pljq/PHNet/tree/main/img/results/1638.jpg)
 
 __注意： 本模型测试图片像素约为`400px X 400px`__
