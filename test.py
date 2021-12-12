@@ -14,7 +14,7 @@ from utils import reverse_mapping, visulize_mapping, edge_align, get_boundary_po
 
 def construct_model(args):
     # model = pose_estimation.PoseModel(args)
-    model = get_model(trunk='resnet50', args=args)
+    model = get_model(trunk='vgg19', args=args)# resnet50
     print(model)
     state_dict = torch.load(args.model)['model']
     model.load_state_dict(state_dict)
