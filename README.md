@@ -13,7 +13,7 @@
 - 使用pytorch 3.6 在Ubuntu 18.04系统上运行，显存8G
 
 ## Inference
-### step 1: 安装 [requirement.txt](https://github.com/pljq/PHNet/requirement.txt) 中的Python包
+### step 1: 安装 [requirement.txt](https://github.com/pljq/PHNet/blob/main/requirements.txt) 中的Python包
 
 ### step 2: 下载预训练模型
 
