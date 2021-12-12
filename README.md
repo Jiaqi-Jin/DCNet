@@ -21,12 +21,8 @@
 
 ### step 3: 运行以下代码测试图片
   `python test.py --image_path [your test image path] --model [pretrain model path] --save_path [save path]`
-- 测试结果：
+- 部分测试结果：
 
-![0498](https://github.com/pljq/PHNet/tree/main/img/results/0498.jpg)
-
-![1173](https://github.com/pljq/PHNet/tree/main/img/results/1173.jpg)
-
-![1648](https://github.com/pljq/PHNet/tree/main/img/results/1638.jpg)
+![part_res](https://github.com/pljq/PHNet/blob/main/part_res.png)
 
 __注意： 本模型测试图片像素约为`400px X 400px`__
