@@ -17,7 +17,7 @@
 
 ### step 2: 下载预训练模型
 
-  - 预训练模型下载链接：[8s1d](https://pan.baidu.com/s/1iRkM4wJckckfvb4vC6w8tQ)
+  - 预训练模型的下载链接：[dhls](https://pan.baidu.com/s/1JnNwUEcJK6opUg9yfqgiOg)
 
 ### step 3: 运行以下代码测试图片
   `python test.py --image_path [your test image path] --model [pretrain model path] --save_path [save path]`
