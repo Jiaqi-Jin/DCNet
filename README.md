@@ -1,28 +1,43 @@
 ## Introduction
-
-### PHNet——基于深度关联域和霍夫变换的语义直线检测算法
-
+Status: Archive (code is provided as-is, no updates expected)
+### Inference code
+Code for reproducing results in the paper __Detecting Sematic Lines Using Deep Chain Network__ 
 ## Network Architecture
-
 ![pipeline](https://github.com/pljq/PHNet/blob/main/pipeline.png)
 
+## Results
+![part_res](https://github.com/pljq/PHNet/blob/main/part_res.png)
+
+###### For more test results, see the link below.
+
 ## Require
-- 第三方Python包详见[requirement.txt](https://github.com/pljq/PHNet/blob/main/requirements.txt)
+Please `pip install` the following packages:
+- Cython
+- torch>=1.5
+- torchvision>=0.6.1
+- progress
+- matplotlib
+- scipy
+- numpy
+- opencv
 
 ## Development Environment
-- 使用pytorch 3.6 在Ubuntu 18.04系统上运行，显存8G
+
+Running on Ubuntu 18.04 system with pytorch 3.6, 8G VRAM.
 
 ## Inference
-### step 1: 安装 [requirement.txt](https://github.com/pljq/PHNet/blob/main/requirements.txt) 中的Python包
+### step 1: Install python packages in [requirement.txt](https://github.com/pljq/PHNet/blob/main/requirements.txt) .
 
-### step 2: 下载预训练模型
+### step 2: Download the weight `model/Ours/paf_800X800_6000_80_14_8_SGD_0.1.pth` to the root directory.
 
-  - 预训练模型的下载链接：[dhls](https://pan.baidu.com/s/1JnNwUEcJK6opUg9yfqgiOg)
+- Model weights and test results download link：[af9p](https://pan.baidu.com/s/1coFL9CIx0wu7twu5fD9gog).
 
-### step 3: 运行以下代码测试图片
+### step 3: Run the following code to test the image.
   `python test.py --image_path [your test image path] --model [pretrain model path] --save_path [save path]`
-- 部分测试结果：
+
+- Partial test results：
 
 ![part_res](https://github.com/pljq/PHNet/blob/main/part_res.png)
 
-__注意： 本模型测试图片像素约为`400px X 400px`__
+__Note: The pixels of the test image of this model are approximately `400 px X 400 px`__.
+
