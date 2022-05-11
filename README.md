@@ -3,12 +3,8 @@ Status: Archive (code is provided as-is, no updates expected)
 ### Inference code
 Code for reproducing results in the paper __Detecting Sematic Lines Using Deep Chain Network__ 
 ## Network Architecture
-![pipeline](https://github.com/pljq/PHNet/blob/main/pipeline.png)
+![pipeline](https://github.com/pljq/DCNet/pipeline.png)
 
-## Results
-![part_res](https://github.com/pljq/PHNet/blob/main/part_res.png)
-
-###### For more test results, see the link below.
 
 ## Require
 Please `pip install` the following packages:
@@ -26,7 +22,7 @@ Please `pip install` the following packages:
 Running on Ubuntu 18.04 system with pytorch 3.6, 8G VRAM.
 
 ## Inference
-### step 1: Install python packages in [requirement.txt](https://github.com/pljq/PHNet/blob/main/requirements.txt) .
+### step 1: Install python packages in [requirement.txt](https://github.com/pljq/DCNet/blob/main/requirements.txt) .
 
 ### step 2: Download the weight `model/Ours/paf_800X800_6000_80_14_8_SGD_0.1.pth` to the root directory.
 
@@ -37,7 +33,7 @@ Running on Ubuntu 18.04 system with pytorch 3.6, 8G VRAM.
 
 - Partial test results：
 
-![part_res](https://github.com/pljq/PHNet/blob/main/part_res.png)
+![part_res](https://github.com/pljq/DCNet/blob/main/part_res.png)
 
 __Note: The pixels of the test image of this model are approximately `400 px X 400 px`__.
 
