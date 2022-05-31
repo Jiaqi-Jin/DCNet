@@ -61,7 +61,6 @@ def normalize(origin_img):
 def process(model,  args):
     stride = args.stride
     padValue = args.padValue
-    scale_search = args.scale_search
     boxsize = args.boxsize
     save_path = args.save_path
     input_image_path = args.image_path
@@ -71,51 +70,50 @@ def process(model,  args):
         origin_img = cv2.imread(input_path)
         normed_img = normalize(origin_img)
         height, width, _ = normed_img.shape
-        multiplier = [x * boxsize / height for x in scale_search]#diffenrent scale
+
         for scale_id in range(args.num_fpn_scale):
-            for m in range(len(multiplier)):
-                scale = multiplier[m]
-                imgToTest = cv2.resize(normed_img, (0, 0), fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
-                imgToTest_padded, pad = padRightDownCorner(imgToTest, stride, padValue)
-                input_img = np.transpose(imgToTest_padded[:, :, :, np.newaxis], (3, 2, 0, 1))  # required shape (1, c, h, w)
-                input_var = torch.autograd.Variable(torch.from_numpy(input_img).cuda().float())
-                tic = time.time()
-                # get the features
-                out_scales = model(input_var)
-                toc = time.time()
-                key_points = torch.sigmoid(out_scales[scale_id][-1])
-                binary_kmap = key_points.squeeze().cpu().detach().numpy()>0.1
 
-                kmap_label = label(binary_kmap, connectivity=1)
-                props = regionprops(kmap_label)
+            imgToTest = cv2.resize(normed_img, (0, 0), fx=boxsize/width, fy=boxsize/height, interpolation=cv2.INTER_CUBIC)
+            imgToTest_padded, pad = padRightDownCorner(imgToTest, stride, padValue)
+            input_img = np.transpose(imgToTest_padded[:, :, :, np.newaxis], (3, 2, 0, 1))  # required shape (1, c, h, w)
+            input_var = torch.autograd.Variable(torch.from_numpy(input_img).cuda().float())
+            tic = time.time()
+            # get the features
+            out_scales = model(input_var)
+            toc = time.time()
+            key_points = torch.sigmoid(out_scales[scale_id][-1])
+            binary_kmap = key_points.squeeze().cpu().detach().numpy()>0.1
 
-                plist = []
-                for prop in props:
-                    plist.append(prop.centroid)
+            kmap_label = label(binary_kmap, connectivity=1)
+            props = regionprops(kmap_label)
 
-                # size = (size[0][0], size[0][1])
-                b_points = reverse_mapping(plist, numAngle=100, numRho=50,
+            plist = []
+            for prop in props:
+                plist.append(prop.centroid)
+
+            # size = (size[0][0], size[0][1])
+            b_points = reverse_mapping(plist, numAngle=100, numRho=50,
                                            size=(400, 400))
-                scale_w = 1
-                scale_h = 1
-                for i in range(len(b_points)):
-                    y1 = int(np.round(b_points[i][0] * scale_h))
-                    x1 = int(np.round(b_points[i][1] * scale_w))
-                    y2 = int(np.round(b_points[i][2] * scale_h))
-                    x2 = int(np.round(b_points[i][3] * scale_w))
-                    if x1 == x2:
-                        angle = -np.pi / 2
-                    else:
-                        angle = np.arctan((y1 - y2) / (x1 - x2))
-                    (x1, y1), (x2, y2) = get_boundary_point(y1, x1, angle, 400, 400)
-                    b_points[i] = (y1, x1, y2, x2)
+            scale_w = width/boxsize
+            scale_h = height/boxsize
+            for i in range(len(b_points)):
+                y1 = int(np.round(b_points[i][0] * scale_h))
+                x1 = int(np.round(b_points[i][1] * scale_w))
+                y2 = int(np.round(b_points[i][2] * scale_h))
+                x2 = int(np.round(b_points[i][3] * scale_w))
+                if x1 == x2:
+                    angle = -np.pi / 2
+                else:
+                    angle = np.arctan((y1 - y2) / (x1 - x2))
+                (x1, y1), (x2, y2) = get_boundary_point(y1, x1, angle, width, height)
+                b_points[i] = (y1, x1, y2, x2)
 
-                # vis = visulize_mapping(b_points, size[::-1], names[0])
-                for (y1, x1, y2, x2) in b_points:
-                    img = cv2.line(origin_img, (x1, y1), (x2, y2), (255, 255, 0), thickness=int(0.01 * max(400, 400)))
+            # vis = visulize_mapping(b_points, size[::-1], names[0])
+            for (y1, x1, y2, x2) in b_points:
+                img = cv2.line(origin_img, (x1, y1), (x2, y2), (255, 255, 0), thickness=int(0.01 * max(width, height)))
 
-                cv2.imwrite(save_path + file, img)
-        print(file[:4] + ' ' + 'processing time is %.5f' % (toc - tic))
+            cv2.imwrite(save_path + file, img)
+        print(file + ' ' + 'processing time is %.5f' % (toc - tic))
 
 
 
@@ -125,7 +123,6 @@ if __name__ == '__main__':
     parser.add_argument('--model', type=str, required=True, help='path to the weights file')
     parser.add_argument('--save_path', type=str, required=True, help='path to save results')
     parser.add_argument('--boxsize', type=int, default=400)
-    parser.add_argument('--scale-search', type=int, default=[1])
     parser.add_argument('--stride', type=int, default=8)
     parser.add_argument('--padValue', type=int, default=0)
     parser.add_argument('--num_fpn_scale', type=int, default=1)
