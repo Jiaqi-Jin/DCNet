@@ -33,7 +33,7 @@ Running on Ubuntu 18.04 system with pytorch 3.6, 8G VRAM.
 ### step 3: Run the following code to test the image.
   `python test.py --image_path [your test image path] --model [pretrain model path] --save_path [save path]`
 
-- Partial test results：
+- Partial test results on the NKL dataset：
 
 ![part_res](https://github.com/pljq/DCNet/blob/main/NKLres.png)
 
