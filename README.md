@@ -37,5 +37,3 @@ Running on Ubuntu 18.04 system with pytorch 3.6, 8G VRAM.
 
 ![part_res](https://github.com/pljq/DCNet/blob/main/NKLres.png)
 
-__Note: The pixels of the test image of this model are approximately `400 px X 400 px`__.
-
